@@ -1,31 +1,7 @@
-import { useState, useEffect } from 'react'
-import initializeZKsync from '../scripts/zksync';
-import DeployForm from './components/DeployForm';
+import Dash from "./components/Dash";
 
-function App() {
-  const [addresses, setAddresses] = useState(null);
+const App = () => {
+  return <Dash />;
+};
 
-  useEffect(() => {
-    async function fetchAddresses() {
-      const result = await initializeZKsync();
-      setAddresses(result);
-    }
-    fetchAddresses();
-  }, []);
-
-  return (
-    <>
-      <div className="App">
-        <h1>ZKsync Contract Addresses</h1>
-        {addresses ? (
-          <pre>{JSON.stringify(addresses, null, 2)}</pre>
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-      <DeployForm />
-    </>
-  );
-}
-
-export default App
+export default App;
