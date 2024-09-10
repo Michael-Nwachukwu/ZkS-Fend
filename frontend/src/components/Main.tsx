@@ -2,6 +2,7 @@
 import React from "react";
 import DeployContent from "./DeployContent";
 import FaucetContent from "./FaucetContent";
+import TransactionsContent from "./TransactionsContent";
 
 interface MainDashProps {
   selectedTab: string;
@@ -12,6 +13,7 @@ const MainDash: React.FC<MainDashProps> = ({ selectedTab }) => {
     <div className="flex-1 p-6">
       {selectedTab === "deploy" && <DeployContent />}
       {selectedTab === "faucet" && <FaucetContent />}
+      {selectedTab === "transactions" && <TransactionsContent />}
     </div>
   );
 };
