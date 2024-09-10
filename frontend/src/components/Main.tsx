@@ -1,6 +1,7 @@
 import React from "react";
 import DeployContent from "./DeployContent";
 import FaucetContent from "./FaucetContent";
+import TransactionsContent from "./TransactionsContent";
 
 interface MainDashProps {
   selectedTab: "deploy" | "faucet";
