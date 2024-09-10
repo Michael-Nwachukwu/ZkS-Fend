@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import DashFooter from "./ui/DashFooter";
+import DashFooter from "./DashFooter";
 import GeneralHeader from "./GeneralHeader";
 import MainDash from "./Main";
 
@@ -14,17 +14,17 @@ export default function Dash() {
 
       <div className="flex h-screen pt-20 bg-[#101014] text-[#FFFFFF]">
         {/* Sidebar */}
-        <Sidebar />
+        <Sidebar selectedTab={selectedTab} />
 
         {/* Main content */}
         <main className="flex-1 flex flex-col ">
           {" "}
           {/* Existing Header */}
-          <Header />
+          <Header selectedTab={selectedTab} />
           {/* Main Dashboard with Tabs */}
           <MainDash selectedTab={selectedTab} />
           {/* Footer */}
-          <DashFooter />
+          <DashFooter selectedTab={selectedTab} />
         </main>
       </div>
     </>
