@@ -9,6 +9,8 @@ lerna-debug.log*
 frontend/.env
 ccontract/.env
 
+.env
+
 frontend/node_modules
 server/node_modules
 contract/node_modules
