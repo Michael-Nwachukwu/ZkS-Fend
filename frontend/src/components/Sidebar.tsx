@@ -14,7 +14,9 @@ const Sidebar = ({ selectedTab }: SidebarProps) => {
     return <div className="w-64 bg-[#101014]"> {/* Sidebar is blank */} </div>;
   }
 
-  const [deployments, setDeployments] = useState([
+  // setDeployments function removed for es-lint no unused variables warning
+  // causing errors on deployment; to be added back when it'd be used 
+  const [deployments ] = useState([
     "Deployment 1",
     "Deployment 2",
     "Deployment 3",
