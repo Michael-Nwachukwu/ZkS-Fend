@@ -11,6 +11,7 @@ import {
 import { WagmiProvider } from "wagmi";
 import { zksyncSepoliaTestnet, zksync, mainnet } from "wagmi/chains";
 import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { BrowserRouter } from "react-router-dom";
 
 const config = getDefaultConfig({
   appName: "My RainbowKit App",
@@ -27,7 +28,9 @@ createRoot(document.getElementById("root")!).render(
             accentColor: "#7b3fe4",
             accentColorForeground: "white",
           })}>
-          <App />
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
         </RainbowKitProvider>
       </QueryClientProvider>
     </WagmiProvider>

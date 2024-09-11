@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import MemoMessageIcon from "@/icons/MessageIcon";
 import { Button } from "./ui/button";
 import MemoEditIcon from "@/icons/EditIcon";
 import MemoSaveIcon from "@/icons/SaveIcon";
 import MemoCancelIcon from "@/icons/CancelIcon";
+
 interface SidebarProps {
   selectedTab: string;
 }
 
 const Header = ({ selectedTab }: SidebarProps) => {
+  // Sidebar for the 'faucet' tab
   if (selectedTab === "faucet") {
     return <div className="w-64 bg-[#101014]"> {/* Sidebar is blank */} </div>;
   }
@@ -16,6 +18,8 @@ const Header = ({ selectedTab }: SidebarProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [text, setText] = useState("Name of deployment");
   const [tempText, setTempText] = useState(text);
+
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleEditClick = () => {
     setIsEditing(true);
@@ -31,6 +35,12 @@ const Header = ({ selectedTab }: SidebarProps) => {
     setIsEditing(false);
   };
 
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus(); // Automatically focus on input when editing starts
+    }
+  }, [isEditing]);
+
   return (
     <header className="border-b border-border p-4">
       <div className="flex items-center justify-between">
@@ -38,6 +48,7 @@ const Header = ({ selectedTab }: SidebarProps) => {
           <MemoMessageIcon className="w-5 h-5 text-white" />
           {isEditing ? (
             <input
+              ref={inputRef}
               type="text"
               value={tempText}
               onChange={(e) => setTempText(e.target.value)}
@@ -50,20 +61,23 @@ const Header = ({ selectedTab }: SidebarProps) => {
             <>
               <Button
                 onClick={handleCancelClick}
-                className="bg-transparent hover:bg-transparent">
-                <MemoCancelIcon className="w-7 h-7 text-white" />
+                className="bg-transparent hover:bg-transparent"
+                aria-label="Cancel Edit">
+                <MemoCancelIcon className="w-7 h-7 text-white cursor-pointer" />
               </Button>
               <Button
                 onClick={handleSaveClick}
-                className="bg-transparent hover:bg-transparent">
-                <MemoSaveIcon className="w-7 h-7 text-white" />
+                className="bg-transparent hover:bg-transparent"
+                aria-label="Save Changes">
+                <MemoSaveIcon className="w-7 h-7 text-white cursor-pointer" />
               </Button>
             </>
           ) : (
             <Button
               onClick={handleEditClick}
-              className="bg-transparent hover:bg-transparent">
-              <MemoEditIcon className="w-7 h-7 text-white" />
+              className="bg-transparent hover:bg-transparent"
+              aria-label="Edit Name">
+              <MemoEditIcon className="w-7 h-7 text-white cursor-pointer" />
             </Button>
           )}
         </h1>

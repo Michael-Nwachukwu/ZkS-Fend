@@ -3,6 +3,8 @@ import { Input } from "./ui/input";
 import { ScrollArea } from "./ui/scroll-area";
 import { Button } from "./ui/button";
 import MemoPlusIcon from "@/icons/PlusIcon";
+import { useState } from "react";
+
 interface SidebarProps {
   selectedTab: string;
 }
@@ -12,14 +14,24 @@ const Sidebar = ({ selectedTab }: SidebarProps) => {
     return <div className="w-64 bg-[#101014]"> {/* Sidebar is blank */} </div>;
   }
 
+  const [deployments, setDeployments] = useState([
+    "Deployment 1",
+    "Deployment 2",
+    "Deployment 3",
+    "Deployment 4",
+    "Deployment 5",
+  ]);
+
   return (
     <aside className="w-[17rem] px-1 border-r border-border hidden md:block">
       <div className="py-4 px-[3px]">
-        <div className="flex  items-center   space-x-4 mb-4">
+        <div className="flex items-center space-x-4 mb-4">
           <h2 className="text-xs font-[400] pl-2 text-[#8E8EA2]">
             DEPLOYED PROJECTS
           </h2>
-          <Button className="flex  p-2 items-center space-x-1 bg-[#3742DD59] hover:bg-[#3742DD59]">
+          <Button
+            className="flex p-2 items-center space-x-1 bg-[#3742DD59] hover:bg-[#3742DD]"
+            aria-label="Add new project">
             <MemoPlusIcon />
             <p>Add new</p>
           </Button>
@@ -28,8 +40,9 @@ const Sidebar = ({ selectedTab }: SidebarProps) => {
           <SearchIcon className="absolute left-2 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
           <Input
             type="search"
-            placeholder="search"
+            placeholder="Search"
             className="bg-transparent border-[#525264] pl-8"
+            aria-label="Search projects"
           />
         </div>
         <ScrollArea className="h-[calc(100vh-200px)]">
@@ -38,9 +51,13 @@ const Sidebar = ({ selectedTab }: SidebarProps) => {
             <Button variant="ghost" className="w-full justify-start">
               <span className="mr-2">🚀</span> New deployment
             </Button>
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Button key={i} variant="ghost" className="w-full justify-start">
-                <span className="mr-2">📁</span> Title of deployment
+            {deployments.map((deployment, index) => (
+              <Button
+                key={index}
+                variant="ghost"
+                className="w-full justify-start hover:bg-[#3742DD]"
+                aria-label={`View deployment ${deployment}`}>
+                <span className="mr-2">📁</span> {deployment}
               </Button>
             ))}
           </div>
