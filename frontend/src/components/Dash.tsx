@@ -3,30 +3,29 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import DashFooter from "./DashFooter";
 import GeneralHeader from "./GeneralHeader";
-import MainDash from "./Main";
+import { Outlet } from "react-router-dom";
 
-export default function Dash() {
+const Layout = () => {
   const [selectedTab, setSelectedTab] = useState<string>("deploy");
 
   return (
-    <>
+    <div className="min-h-[100vh] flex flex-col bg-[#101014] text-[#FFFFFF]">
+      {/* General Header at the top */}
       <GeneralHeader selectedTab={selectedTab} onTabChange={setSelectedTab} />
 
-      <div className="flex h-screen pt-20 bg-[#101014] text-[#FFFFFF]">
-        {/* Sidebar */}
+      {/* Main content with flex to handle layout */}
+      <div className="flex-1 flex pt-20">
         <Sidebar selectedTab={selectedTab} />
 
-        {/* Main content */}
-        <main className="flex-1 flex flex-col ">
-          {" "}
-          {/* Existing Header */}
+        {/* Main section with content */}
+        <main className="flex-1 flex flex-col justify-between">
           <Header selectedTab={selectedTab} />
-          {/* Main Dashboard with Tabs */}
-          <MainDash selectedTab={selectedTab} />
-          {/* Footer */}
+          <Outlet /> {/* This will render the route components */}
           <DashFooter selectedTab={selectedTab} />
         </main>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default Layout;

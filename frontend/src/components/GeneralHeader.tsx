@@ -1,6 +1,6 @@
 import React from "react";
 import MemoLogo from "@/icons/Logo";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Link } from "react-router-dom";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 
 interface GeneralHeaderProps {
@@ -15,19 +15,30 @@ const GeneralHeader: React.FC<GeneralHeaderProps> = ({
   return (
     <header className="fixed top-0 left-0 right-0 bg-[#20232a] p-4 flex items-center justify-between border-b border-[#333] z-50">
       <h1 className="text-xl font-bold text-white">
-        <MemoLogo className="h-12 w-28" />
+        <MemoLogo className="h-[3.5rem] w-32" />
       </h1>
 
-      <div className="flex-1 flex justify-center">
-        <Tabs
-          value={selectedTab}
-          onValueChange={onTabChange}
-          className="w-[400px]">
-          <TabsList className="flex space-x-4 bg-transparent">
-            <TabsTrigger value="deploy">Deploy</TabsTrigger>
-            <TabsTrigger value="faucet">Faucet</TabsTrigger>
-          </TabsList>
-        </Tabs>
+      <div className="flex-1 flex justify-center space-x-4">
+        <Link
+          to="/deploy"
+          className={`text-white px-4 py-2 ${
+            selectedTab === "deploy"
+              ? "border-b-2 border-blue-500"
+              : "bg-transparent"
+          }`}
+          onClick={() => onTabChange("deploy")}>
+          Deploy
+        </Link>
+        <Link
+          to="/faucet"
+          className={`text-white px-4 py-2 ${
+            selectedTab === "faucet"
+              ? "border-b-2 border-blue-500"
+              : "bg-transparent"
+          }`}
+          onClick={() => onTabChange("faucet")}>
+          Faucet
+        </Link>
       </div>
 
       <ConnectButton
@@ -42,4 +53,4 @@ const GeneralHeader: React.FC<GeneralHeaderProps> = ({
   );
 };
 
-export default GeneralHeader;
+export default React.memo(GeneralHeader);
