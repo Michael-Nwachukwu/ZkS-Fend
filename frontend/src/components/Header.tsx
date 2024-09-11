@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import MemoMessageIcon from "@/icons/MessageIcon";
 import { Button } from "./ui/button";
 import MemoEditIcon from "@/icons/EditIcon";

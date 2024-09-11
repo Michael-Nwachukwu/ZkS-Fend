@@ -1,5 +1,5 @@
 // src/components/CodeEditor.tsx
-import React, { useRef } from "react";
+import React from "react";
 import MonacoEditor from "@monaco-editor/react";
 
 interface CodeEditorProps {
@@ -23,7 +23,7 @@ const CodeEditor: React.FC<CodeEditorProps> = ({
     }
   };
 
-  const handleEditorMount = (editor: any, monaco: any) => {
+  const handleEditorMount = (editor: any) => {
     if (onMount) {
       onMount(editor);
     }
